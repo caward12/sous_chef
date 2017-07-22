@@ -71,6 +71,31 @@ describe "recipes api" do
   it "can create a new recipe" do
     user = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234", password_confirmation: "1234")
 
-    
+    params ={
+      name: "butter toast",
+      servings: 1,
+      cook_time: "5 min",
+      ingredients: [
+        {name: "bread",
+        amount: "2 slices"},
+        {name: "butter",
+        amount: "2tb"}
+      ],
+      instructions: [
+        {steps: "toast bread and slather in butter"}
+      ],
+      categories: [
+        {name: "breakfast"}
+      ],
+      user_id: "#{user.id}"
+    }
+
+    post "/api/v1/recipes", params
+
+    expect(response).to be_success
+
+    new_recipe = JSON.parse(response.body)
+    expect(new_recipe["name"]).to eq("butter toast")
+
   end
 end

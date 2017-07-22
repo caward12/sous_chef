@@ -18,10 +18,25 @@ class Api::V1::RecipesController < ApplicationController
     end
   end
 
+  def create
+    user = User.find(params[:user_id])
+    @recipe = user.recipes.new(recipe_params)
+    if @recipe.save
+      render json: @recipe
+    else
+      render json: @recipe.errors.full_messages
+    end
+  end
+
   private
 
   def recipe_params
-    params.permit(:name, :servings, :cook_time, :prep_time, :ingredients, :instructions, :categories)
+    params.permit(:name,
+                  :servings,
+                  :cook_time,
+                  :prep_time,
+                  :user_id
+                  )
   end
 
 end
