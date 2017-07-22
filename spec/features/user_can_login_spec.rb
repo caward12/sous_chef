@@ -8,7 +8,7 @@ describe "User login" do
 
     fill_in "session[email]", with: "bob@aol.com"
     fill_in "session[password]", with: "test"
-    click_on "Log In"
+    click_on "Log In to Account"
 
     expect(current_path).to eq(user_path(user))
     expect(page).to have_content("Welcome Bob")

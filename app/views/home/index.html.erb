@@ -1,3 +1,19 @@
-<h1>Sous Chef </h1>
+<div class="home">
+  <div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- <h2 class="header center">Git-Buddy</h2> -->
+    <div class ="center">
+      <% if current_user %>
+        <%= button_to "My Dashboard", user_path(current_user), method: :get, class: "waves-effect waves-light btn red" %>
+      <% else %>
+        <%= button_to "Create Account", new_user_path, method: :get, class: "waves-effect waves-light btn red" %>
+      <% end %>
+    </div>
+  </div>
 
-<%= link_to "Create Account", new_user_path %>
+</div>
