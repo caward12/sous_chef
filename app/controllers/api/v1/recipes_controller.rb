@@ -35,7 +35,8 @@ class Api::V1::RecipesController < ApplicationController
                   :servings,
                   :cook_time,
                   :prep_time,
-                  :user_id
+                  :user_id,
+                  :instructions
                   )
   end
 
