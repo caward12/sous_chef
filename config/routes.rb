@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:create, :update, :show]
       resources :recipes, only: [:index, :show, :update, :create]
-      resources :ingredients, only: [:create]
+      resources :ingredients, only: [:create, :update]
     end
   end
 end
