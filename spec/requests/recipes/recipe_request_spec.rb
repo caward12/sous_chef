@@ -13,7 +13,7 @@ describe "recipes api" do
     recipe2.ingredients.create(name: "jam", amount: "1tb")
     recipe2.categories.create(name: "lunch")
 
-    get "/api/v1/recipes?user_id=1"
+    get "/api/v1/recipes?user_id=#{user.id}"
 
     expect(response).to be_success
 

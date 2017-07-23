@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "user" do
-  it "can return single user" do
+  xit "can return single user" do
     user1 = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234")
 
     get '/api/v1/users/1'
@@ -15,7 +15,7 @@ describe "user" do
     expect(user["email"]).to eq(user1.email)
   end
 
-  it "can create a new user" do
+  xit "can create a new user" do
 
     user_params = {first_name: "Bob", last_name: "Jones", email: "bob@aol.com", password: "test", password_confirmation: "test"}
     post "/api/v1/users", params: user_params
