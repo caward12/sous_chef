@@ -11,41 +11,22 @@
      <%= button_to "Create New Recipe", new_recipe_path, method: :get, class: "waves-effect waves-light btn red" %>
    </div>
 <br>
+  <% @recipes.each do |recipe| %>
    <div class="col m4 s12">
      <div class="col s9">
        <div class="card">
          <div class="card-content">
-           <strong><%= @recipes.first.name %></strong><br>
+           <strong><%= recipe.name %></strong><br>
+           Servings: <%= recipe.servings %>
+         </div>
+         <div class="card action">
+           <% recipe.categories.each do |category| %>
+           <div class="chip"><%=category.name%></div>
+           <% end %>
          </div>
        </div>
      </div>
    </div>
-   <div class="col m4 s12">
-     <div class="col s9">
-       <div class="card">
-         <div class="card-content">
-           <strong><%= @recipes[1].name %></strong><br>
-         </div>
-       </div>
-     </div>
-   </div>
-   <div class="col m4 s12">
-     <div class="col s9">
-       <div class="card">
-         <div class="card-content">
-           <strong><%= @recipes[2].name %></strong><br>
-         </div>
-       </div>
-     </div>
-   </div>
-   <div class="col m4 s12">
-     <div class="col s9">
-       <div class="card">
-         <div class="card-content">
-           <strong><%= @recipes[3].name %></strong><br>
-         </div>
-       </div>
-     </div>
-   </div>
-
+   <% end %>
+   
  </div>
