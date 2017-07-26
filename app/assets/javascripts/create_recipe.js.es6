@@ -34,7 +34,7 @@ function createCategories(){
     url: "/api/v1/categories",
     data: categories
   }).then(function(newCategories){
-    location.href = `/recipes/${recipe}`
+    location.href = "/recipes/" + recipe
   })
 }
 
@@ -51,14 +51,14 @@ function createInstructions(){
 
   $.ajax({
     type: "PUT",
-    url: `/api/v1/recipes/${recipe}`,
+    url: "/api/v1/recipes/" + recipe,
     data: instructions
   }).then(function(updatedRecipe){
     $('.create-instructions').hide()
     if ($('.create-categories').is(":hidden")){
       $('.create-categories').show()
     }
-    $('.create-categories').attr('id', `${updatedRecipe.id}`)
+    $('.create-categories').attr('id', updatedRecipe.id)
   })
 }
 
@@ -104,7 +104,7 @@ function createIngredients(){
     if ($('.create-instructions').is(":hidden")){
       $('.create-instructions').show()
     }
-    $('.create-instructions').attr('id', `${newIngredients[0].recipe_id}`)
+    $('.create-instructions').attr('id', newIngredients[0].recipe_id)
   })
 }
 function bindAddIngredientswithForm(){
@@ -129,7 +129,7 @@ function createRecipe(){
             if ($('.create-ingredients').is(":hidden")){
               $('.create-ingredients').show()
             }
-            $('.create-ingredients').attr('id', `${newRecipe.id}`)
+            $('.create-ingredients').attr('id', newRecipe.id)
           })
 
 
