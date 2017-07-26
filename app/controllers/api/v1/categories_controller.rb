@@ -8,7 +8,18 @@ class Api::V1::CategoriesController < ApplicationController
 
   def create
     recipe = Recipe.find(params[:recipe_id])
-    render json: recipe.categories.create(category_params)
+    if params["categories"].count == 1
+      recipe.categoires.create(params["categories"]["0"])
+    else
+      params["categories"].each do |category|
+        if params["categories"][category]["name"] != ""
+          recipe.categories.create(categories_params(params["categories"][category]))
+        else
+          render json: category.errors.full_messages
+        end
+      end
+      render json: recipe.categories
+    end
   end
 
   def update
@@ -21,6 +32,11 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   private
+
+  def categories_params(incoming_params)
+    incoming_params.permit(:name)
+  end
+
   def category_params
     params.permit(:name)
   end

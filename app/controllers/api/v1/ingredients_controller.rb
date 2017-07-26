@@ -4,8 +4,8 @@ class Api::V1::IngredientsController < ApplicationController
   def create
     recipe = Recipe.find(params[:recipe_id])
     params["ingredients"].each do |ingredient|
-      if ingredient["name"] != "" && ingredient["amount"] != ""
-        recipe.ingredients.create(ingredients_params(ingredient))
+      if params["ingredients"][ingredient]["name"] != "" && params["ingredients"][ingredient]["amount"] != ""
+        recipe.ingredients.create(ingredients_params(params["ingredients"][ingredient]))
       else
         render json: ingredient.errors.full_messages
       end

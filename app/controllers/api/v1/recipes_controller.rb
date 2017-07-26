@@ -19,7 +19,7 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = current_user
     @recipe = user.recipes.new(recipe_params)
     if @recipe.save
       render json: @recipe
@@ -31,7 +31,7 @@ class Api::V1::RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.permit(:name,
+    params.require(:recipe).permit(:name,
                   :servings,
                   :cook_time,
                   :prep_time,

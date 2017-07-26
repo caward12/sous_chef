@@ -1,0 +1,6 @@
+<%= form_tag('instructions', remote: true, class: "instructions-form") do |f| %>
+  <%= label_tag :instructions %>
+  <%= text_area_tag :instructions %>
+
+<%= submit_tag "Add Categories", class: "add-categories" %>
+<% end %>

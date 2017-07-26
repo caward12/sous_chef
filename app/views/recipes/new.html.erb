@@ -1,0 +1,44 @@
+<div class="container">
+  <h4>Create New Recipe</h4>
+  <div class="create-recipe">
+    <%= render partial: 'recipe' %>
+  </div>
+
+  <div class="create-ingredients">
+    <h5> Add ingredients </h5>
+
+      <%= form_tag('ingredient', remote: true, class: "ingredient-form") do |f| %>
+        <div class="ingredients">
+          <%= render partial: 'ingredients' %>
+        </div>
+        <br>
+        <a href="javascript:;" id="addNewIngredient">Add Another Ingredient</a><br><br>
+        <%= submit_tag "Add Instructions", class: "add-instructions" %>
+      <% end %>
+
+      <div style="display: none;" id="new_ingredients_form">
+        <%= render partial: "ingredients" %>
+      </div>
+  </div>
+
+  <div class="create-instructions">
+    <h5>Add instructions</h5>
+    <%= render partial: 'instructions' %>
+  </div>
+
+  <div class="create-categories">
+    <h5>Add categories</h5>
+    <%= form_tag('category', remote: true, class: "category-form") do |f| %>
+      <div class="categories">
+        <%= render partial: 'categories' %>
+      </div>
+      <br>
+      <a href="javascript:;" id="addNewCategory">Add Another Category</a><br><br>
+      <%= submit_tag "Complete Recipe", class: "complete-recipe" %>
+    <% end %>
+
+    <div style="display: none;" id="new_categories_form">
+      <%= render partial: "categories" %>
+    </div>
+  </div>
+</div>
