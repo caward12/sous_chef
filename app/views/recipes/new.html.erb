@@ -28,6 +28,17 @@
 
   <div class="create-categories">
     <h5>Add categories</h5>
+    <strong>Add from existing</strong>
+      <div class="existing-categories">
+        <table class="exist-cat">
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+    <br>
+    <br>
+    <strong>Add New</strong>
     <%= form_tag('category', remote: true, class: "category-form") do |f| %>
       <div class="categories">
         <%= render partial: 'categories' %>
