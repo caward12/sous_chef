@@ -8,7 +8,7 @@
   <h5>ingredients</h5>
   <ul>
     <% @recipe.ingredients.each do |ingredient| %>
-    <li>ingredient</li>
+    <li><%= ingredient.amount %> <%= ingredient.name %></li>
     <% end %>
   </ul>
   <br>
