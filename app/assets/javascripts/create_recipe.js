@@ -5,8 +5,38 @@ $(document).ready(function(){
   bindAddIngredientswithForm()
   bindAddInstructionswithForm()
   bindAddCategorieswithForm()
+  bindCompleteRecipewithForm()
   bindAddAnotherIngredientwithPartial()
+  bindAddAnotherCategorywithPartial()
 })
+
+function bindCompleteRecipewithForm(){
+  $('.create-categories .complete-recipe').on("click", function(event){
+    event.preventDefault()
+    createCategories()
+  })
+}
+
+function createCategories(){
+  var recipe = $('.create-categories').attr('id')
+  var arr = []
+  Array.from($('.categories .category-fields')).forEach(function(row){
+    var data =  {}
+       data["name"]= $(row).children()[0].children[0].value,
+       arr.push(data)
+  })
+  var categories = {
+    recipe_id: recipe,
+    categories: arr
+  }
+  $.ajax({
+    type: "POST",
+    url: "/api/v1/categories",
+    data: categories
+  }).then(function(newCategories){
+    location.href = `/recipes/${recipe}`
+  })
+}
 
 function bindAddCategorieswithForm(){
   $('.create-instructions .add-categories').on("click", function(event){
@@ -29,6 +59,12 @@ function createInstructions(){
       $('.create-categories').show()
     }
     $('.create-categories').attr('id', `${updatedRecipe.id}`)
+  })
+}
+
+function bindAddAnotherCategorywithPartial(){
+  $('.create-categories #addNewCategory').on("click", function(event){
+    $(".categories").append($("#new_categories_form").html())
   })
 }
 

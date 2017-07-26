@@ -12,7 +12,7 @@
           <%= render partial: 'ingredients' %>
         </div>
         <br>
-        <a href="javascript:;" id="addNewIngredient">Add Another Ingredient</a>
+        <a href="javascript:;" id="addNewIngredient">Add Another Ingredient</a><br><br>
         <%= submit_tag "Add Instructions", class: "add-instructions" %>
       <% end %>
 
@@ -28,5 +28,17 @@
 
   <div class="create-categories">
     <h5>Add categories</h5>
+    <%= form_tag('category', remote: true, class: "category-form") do |f| %>
+      <div class="categories">
+        <%= render partial: 'categories' %>
+      </div>
+      <br>
+      <a href="javascript:;" id="addNewCategory">Add Another Category</a><br><br>
+      <%= submit_tag "Complete Recipe", class: "complete-recipe" %>
+    <% end %>
+
+    <div style="display: none;" id="new_categories_form">
+      <%= render partial: "categories" %>
+    </div>
   </div>
 </div>

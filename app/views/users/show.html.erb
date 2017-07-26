@@ -16,7 +16,7 @@
      <div class="col s9">
        <div class="card">
          <div class="card-content">
-           <strong><%= recipe.name %></strong><br>
+           <strong><%= link_to recipe.name, recipe_path(recipe) %></strong><br>
            Servings: <%= recipe.servings %>
          </div>
          <div class="card action">
@@ -28,5 +28,5 @@
      </div>
    </div>
    <% end %>
-   
+
  </div>
