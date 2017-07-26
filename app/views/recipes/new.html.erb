@@ -6,7 +6,7 @@
 
   <div class="create-ingredients">
     <h5> Add ingredients </h5>
-    
+
       <%= form_tag('ingredient', remote: true, class: "ingredient-form") do |f| %>
         <div class="ingredients">
           <%= render partial: 'ingredients' %>
@@ -23,6 +23,7 @@
 
   <div class="create-instructions">
     <h5>Add instructions</h5>
+    <%= render partial: 'instructions' %>
   </div>
 
   <div class="create-categories">
