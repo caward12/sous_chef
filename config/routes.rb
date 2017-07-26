@@ -7,14 +7,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :recipes, only: [:new, :index, :show]
-  
+
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resources :users, only: [:create, :update, :show]
       resources :recipes, only: [:index, :show, :update, :create]
       resources :ingredients, only: [:create, :update]
       resources :categories, only: [:index, :create, :update]
-      resources :recipe_categories, only: [:destroy]
+      resources :recipe_categories, only: [:create, :destroy]
     end
   end
 end

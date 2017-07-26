@@ -2,7 +2,7 @@ class Api::V1::CategoriesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    user = User.find(params[:user_id])
+    user = User.find(current_user)
     render json: Category.joins(:recipe_categories, :recipes).where('recipes.user_id = ?', user.id)
   end
 
@@ -14,8 +14,8 @@ class Api::V1::CategoriesController < ApplicationController
         else
           render json: category.errors.full_messages
         end
-      render json: recipe.categories
     end
+    render json: recipe.categories
   end
 
   def update

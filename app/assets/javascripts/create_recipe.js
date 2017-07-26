@@ -19,6 +19,10 @@ function bindCompleteRecipewithForm(){
 
 function createCategories(){
   var recipe = $('.create-categories').attr('id')
+  var categoryIds =[]
+  var existingCategories = Array.from($('.existing-categories input:checked')).forEach(function(category){
+                              categoryIds.push(category.id)
+                            })
   var arr = []
   Array.from($('.categories .category-fields')).forEach(function(row){
     var data =  {}
@@ -29,13 +33,47 @@ function createCategories(){
     recipe_id: recipe,
     categories: arr
   }
+  if(categoryIds.length > 0 && arr.length > 0){
+    postRecipeCategories(recipe, categoryIds)
+    postCategories(recipe, categories)
+
+  }
+  else if (categoryIds.length > 0){
+    postRecipeCategories(recipe, categoryIds)
+
+  }
+  else if (arr.length > 0){
+    postCategories(recipe, categories)
+
+  }
+  else {
+    location.href = "/recipes/" + recipe
+  }
+
+}
+
+function postCategories(recipe, categories){
   $.ajax({
     type: "POST",
     url: "/api/v1/categories",
     data: categories
-  }).then(function(newCategories){
-    location.href = "/recipes/" + recipe
-  })
+  }).then(function(data){
+          location.href = "/recipes/" + recipe
+        })
+}
+
+function postRecipeCategories(recipe, categoryIds){
+  debugger
+  $.ajax({
+    type: "POST",
+    url: "/api/v1/recipe_categories",
+    data: {
+      recipe_id: recipe,
+      categories: categoryIds
+    }
+  }).then(function(data){
+          location.href = "/recipes/" + recipe
+        })
 }
 
 function bindAddCategorieswithForm(){
@@ -56,9 +94,23 @@ function createInstructions(){
   }).then(function(updatedRecipe){
     $('.create-instructions').hide()
     if ($('.create-categories').is(":hidden")){
-      $('.create-categories').show()
+      $.ajax({
+        type: "GET",
+        url: "/api/v1/categories",
+      }).then(function(categories){
+        var table = $('.exist-cat tbody')
+        var tableRow = document.createElement('tr')
+        categories.forEach(function(category){
+          $(tableRow).append("<td><input type='checkbox' id=" + category.id + " /><label for=" + category.id + ">" + category.name + "</label></td>")
+          if (category.id % 3 === 0){
+            table.append(tableRow)
+            tableRow = document.createElement('tr')
+          }
+        })
+      })
     }
-    $('.create-categories').attr('id', updatedRecipe.id)
+     $('.create-categories').show()
+     $('.create-categories').attr('id', updatedRecipe.id)
   })
 }
 
