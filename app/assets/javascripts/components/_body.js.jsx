@@ -1,7 +1,7 @@
 var Body = React.createClass({
   render() {
     return (
-      <div>
+      <div className="row">
         <div className="col s3 recipe-categories">
           <Categories />
         </div>
