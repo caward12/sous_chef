@@ -4,31 +4,29 @@ var AllRecipes = React.createClass({
   },
 
   componentDidMount() {
-    $.getJSON('/api/v1/recipes', (response) => { this.setState({recipes: response}) });
+    $.getJSON('/api/v1/recipes', (response) => { this.setState({ recipes: response}) })
+  },
+
+  recipeCards(){
+    return this.state.recipes.map(recipe => {
+      return (<RecipeCard
+        key={recipe.id}
+        name={recipe.name}
+        servings={recipe.servings}
+        cookTime={recipe.cook_time}
+        prepTime={recipe.prep_time}
+        ingredients={recipe.ingredients}
+        instructions={recipe.instructions}
+        categories={recipe.categories}
+        id={recipe.id}/>)
+    })
   },
   render() {
-    var recipes = this.state.recipes.map((recipe) =>{
       return (
-        <div key={recipe.id}>
-            <div className="col s12 m6">
-              <div className="card">
-                <div className="card-content">
-                  <h3>{recipe.name}</h3>
-                  <h6>{recipe.instructions}</h6>
-                </div>
-                <div className="card-action">
-
-                </div>
-              </div>
-            </div>
-
-          </div>
+        <div>
+          {this.recipeCards()}
+        </div>
       )
-    })
-    return (
-      <div>
-      {recipes}
-    </div>
-    )
   }
-});
+
+})
