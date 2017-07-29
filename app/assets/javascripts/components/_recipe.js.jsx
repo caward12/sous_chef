@@ -47,7 +47,7 @@ var Recipe = React.createClass({
           <div className="col s9">
             <div className="card">
               <div className="card-content">
-                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.handleEdit}>Edit</button></p>
+                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit' }</button></p>
                 {name}
                 <p>Servings: {servings}</p>
                 <p>Prep Time: {prep_time}</p>
