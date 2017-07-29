@@ -2,7 +2,8 @@ var Recipe = React.createClass({
   getInitialState(){
     return {recipe: {},
             ingredients: [],
-            categories: []}
+            categories: [],
+            editable: false}
   },
 
   componentDidMount(){
@@ -29,17 +30,28 @@ var Recipe = React.createClass({
     })
   },
 
+  handleEdit(){
+    this.setState({editable: true})
+    console.log("we're editing");
+  },
+
   render(){
+    var name = this.state.editable ? <input type="text" defaultValue={this.state.recipe.name}/> : <h4>{this.state.recipe.name}</h4>
+    var servings = this.state.editable ? <input type="text" defaultValue={this.state.recipe.servings}/> : this.state.recipe.servings
+    var prep_time = this.state.editable ? <input type="text" defaultValue={this.state.recipe.prep_time}/> : this.state.recipe.prep_time
+    var cook_time = this.state.editable ? <input type="text" defaultValue={this.state.recipe.cook_time}/> : this.state.recipe.cook_time
+    var instructions = this.state.editable ? <input type="text" defaultValue={this.state.recipe.instructions}/> : this.state.recipe.instructions
     return (
       <div className="container">
         <div className="col m4 s12">
           <div className="col s9">
             <div className="card">
               <div className="card-content">
-                <h4>{this.state.recipe.name}</h4>
-                <p>Servings: {this.state.recipe.servings}</p>
-                <p>Prep Time: {this.state.recipe.prep_time}</p>
-                <p>Cook Time: {this.state.recipe.cook_time}</p>
+                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.handleEdit}>Edit</button></p>
+                {name}
+                <p>Servings: {servings}</p>
+                <p>Prep Time: {prep_time}</p>
+                <p>Cook Time: {cook_time}</p>
                 <br></br>
                 <h5>Ingredients</h5>
                 <div className="ingredients-list">
@@ -50,7 +62,7 @@ var Recipe = React.createClass({
                 <br></br>
                 <div className="instructions">
                   <h5>Instructions</h5>
-                  {this.state.recipe.instructions}
+                  {instructions}
                 </div>
                 <br></br>
                 <div className="categories">
