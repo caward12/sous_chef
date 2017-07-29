@@ -63,7 +63,6 @@ function postCategories(recipe, categories){
 }
 
 function postRecipeCategories(recipe, categoryIds){
-  debugger
   $.ajax({
     type: "POST",
     url: "/api/v1/recipe_categories",

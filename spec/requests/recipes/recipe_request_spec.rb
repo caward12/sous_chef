@@ -12,6 +12,7 @@ describe "recipes api" do
     recipe2.ingredients.create(name: "bread", amount: "2 slices")
     recipe2.ingredients.create(name: "jam", amount: "1tb")
     recipe2.categories.create(name: "lunch")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     get "/api/v1/recipes?user_id=#{user.id}"
 
@@ -54,8 +55,12 @@ describe "recipes api" do
     recipe.ingredients.create(name: "flour", amount: "1 cup")
     recipe.ingredients.create(name: "eggs", amount: "2")
     recipe.categories.create(name: "breakfast")
-
-    put "/api/v1/recipes/#{recipe.id}?name=banana pancakes"
+    params ={
+      recipe: {
+        name: "banana pancakes"
+      }
+    }
+    put "/api/v1/recipes/#{recipe.id}", params
 
     expect(response).to be_success
 
@@ -66,13 +71,15 @@ describe "recipes api" do
 
   it "can create a new recipe with name, servings, cook_time, prep_time, instructions and user" do
     user = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234", password_confirmation: "1234")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-    params ={
+    params ={ recipe: {
       name: "butter toast",
       servings: 1,
       cook_time: "5 min",
       instructions: "toast bread and slather in butter",
       user_id: "#{user.id}"
+      }
     }
 
     post "/api/v1/recipes", params

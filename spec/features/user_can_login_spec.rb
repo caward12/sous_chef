@@ -6,8 +6,8 @@ describe "User login" do
 
     visit "/login"
 
-    fill_in "session[email]", with: "bob@aol.com"
-    fill_in "session[password]", with: "test"
+    fill_in "session[email]", with: user.email
+    fill_in "session[password]", with: user.password
     click_on "Log In to Account"
 
     expect(current_path).to eq(user_path(user))
