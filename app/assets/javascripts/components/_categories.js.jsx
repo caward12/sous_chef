@@ -8,7 +8,7 @@ var Categories = React.createClass({
 
   render() {
       return (
-        <div>
+        <div className="categories-list">
           <h5 onClick={this.handleFilter}>{this.props.name}</h5>
         </div>
       )

@@ -50,6 +50,7 @@ var Body = React.createClass({
       <div className="row">
         <div className="col s3 recipe-categories">
           {this.categoriesList()}
+          <h5><a href="/recipes">All Recipes</a></h5>
         </div>
         <div className="col s9 all-recipes">
           {this.recipeCards()}

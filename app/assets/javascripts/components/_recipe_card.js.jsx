@@ -21,8 +21,7 @@ var RecipeCard = React.createClass({
       <div className="col s12 m6">
         <div className="card">
           <div className="card-content">
-            <h5>{this.props.name}</h5>
-            <h6>{this.props.instructions}</h6>
+            <h4><a href={'/recipes/' + this.props.id}>{this.props.name}</a></h4>
           </div>
           <div className="card-action">
           {this.categoryChips()}
