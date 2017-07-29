@@ -40,7 +40,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 def login_user(user)
-  visit "/login"
+  visit login_path
 
   fill_in "session[email]", with: user.email
   fill_in "session[password]", with: user.password

@@ -9,7 +9,8 @@ describe "categories api" do
     recipe.categories.create(name: "breakfast")
     recipe.categories.create(name: "light")
 
-    get "/api/v1/categories?user_id=#{user.id}"
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    get "/api/v1/categories"
 
     expect(response).to be_success
 
@@ -23,8 +24,12 @@ describe "categories api" do
   it "can create a category for given recipe" do
     user = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234", password_confirmation: "1234")
     recipe = user.recipes.create(name: "pancakes", servings: 2, cook_time: "30 min", prep_time: "5 min", instructions: "mix all and pour on hot griddle")
-  
-    post "/api/v1/categories?recipe_id=#{recipe.id}&name=breakfast"
+
+    params= {
+      recipe_id: recipe.id,
+      categories: [{name: "breakfast"}]
+    }
+    post "/api/v1/categories", params
 
     expect(response).to be_success
 

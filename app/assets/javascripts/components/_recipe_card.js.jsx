@@ -25,7 +25,7 @@ var RecipeCard = React.createClass({
             <h6>{this.props.instructions}</h6>
           </div>
           <div className="card-action">
-            {this.categoryChips()}
+          {this.categoryChips()}
           </div>
         </div>
       </div>
