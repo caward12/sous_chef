@@ -15,7 +15,7 @@ var Ingredient = React.createClass({
 
     return (
       <li>
-          <p>{amount} {name}    <a href="#" onClick={this.handleEditClick}>{this.state.editable ? 'Submit' : 'Edit' }</a></p>
+          <p>{amount} {name} </p>
       </li>
       )
   }

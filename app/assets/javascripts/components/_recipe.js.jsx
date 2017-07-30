@@ -11,24 +11,30 @@ var Recipe = React.createClass({
       this.setState({ recipe: response, ingredients: response.ingredients, categories: response.categories}) })
   },
 
-  handleEditClick() {
-    debugger
-    if (this.state.editable) {
-        var name = this.state.name;
-        var amount = this.state.amount;
-        console.log('in handleEdit', this.state.editable, name, amount);
-    }
-    this.setState({ editable: !this.state.editable })
-  },
-
   ingredientsList(){
+    var ingredState = this.state.ingredients
     return this.state.ingredients.map(ingredient => {
-      return (<Ingredient
-        key={ingredient.id}
-        name={ingredient.name}
-        amount={ingredient.amount}
-        handleEditClick={this.handleEditClick}
-        id={ingredient.id}/>)
+      return (
+        this.state.editable ? <li key={ingredient.id}>
+                              <input className="ingredient-amount" type='text'
+                                     onChange={ (e) => this.setState({ingredients: [{amount: e.target.value,
+                                                                                      name: ingredient.name,
+                                                                                      id: ingredient.id}]}) }
+                                     defaultValue={ingredient.amount} />
+                              <input className="ingredient-name" type='text'
+                                     onChange={ (e) => this.setState({ingredients: [{ name: e.target.value,
+                                                                                      amount: ingredient.amount,
+                                                                                      id: ingredient.id}]}) }
+                                     defaultValue={ingredient.name} />
+
+                              </li> : <li key={ingredient.id}> {ingredient.amount} {ingredient.name}</li>
+        // <Ingredient
+        // key={ingredient.id}
+        // name={ingredient.name}
+        // amount={ingredient.amount}
+        // handleEditClick={this.handleEditClick}
+        // id={ingredient.id}/>)
+      )
     })
   },
 
@@ -48,10 +54,25 @@ var Recipe = React.createClass({
       var prepTime = this.state.recipe.prep_time
       var cookTime = this.state.recipe.cook_time
       var instructions = this.state.recipe.instructions
+      var ingredients = this.state.ingredients
       var recipe = {name: name, servings: servings, prep_time: prepTime, cook_time: cookTime, instructions: instructions}
       this.handleUpdate(recipe)
+      this.handleUpdateIngredients(ingredients)
     }
     this.setState({ editable: !this.state.editable})
+  },
+
+  handleUpdateIngredients(ingredients){
+    ingredients.forEach(ingredient => {
+      $.ajax({
+        url: `/api/v1/ingredients/${ingredient.id}`,
+        type: 'PUT',
+        data: {ingredient: ingredient},
+        success: ()=>{
+          this.updateIngredients(ingredient)
+        }
+      })
+    })
   },
 
   handleUpdate(recipe){
@@ -63,6 +84,10 @@ var Recipe = React.createClass({
         this.updateRecipe(recipe)
       }
     })
+  },
+
+  updateIngredients(ingredient){
+    this.setState({ingredients: [ingredient]})
   },
 
   updateRecipe(recipe){

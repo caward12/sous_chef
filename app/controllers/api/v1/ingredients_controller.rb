@@ -15,7 +15,7 @@ class Api::V1::IngredientsController < ApplicationController
 
   def update
     ingredient = Ingredient.find(params[:id])
-    if ingredient.update_attributes(ingredient_params)
+    if ingredient.update_attributes(params)
       render json: ingredient
     else
       render json: ingredient.error.full_messages
@@ -28,7 +28,7 @@ class Api::V1::IngredientsController < ApplicationController
   end
 
   def ingredient_params
-    params.permit(:name, :amount)
+    params.require(:ingredient).permit(:name, :amount, :id)
   end
 
 end
