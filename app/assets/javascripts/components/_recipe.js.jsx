@@ -31,23 +31,90 @@ var Recipe = React.createClass({
   },
 
   handleEdit(){
-    this.setState({editable: true})
-    console.log("we're editing");
+    if(this.state.editable){
+      var name = this.state.recipe.name
+      var servings = this.state.recipe.servings
+      var prepTime = this.state.recipe.prep_time
+      var cookTime = this.state.recipe.cook_time
+      var ingredients = this.state.recipe.ingredients
+      console.log('in handleEdit', this.state.editable, name, servings);
+      this.onUpdate()
+    }
+    this.setState({editable: !this.state.editable})
+  },
+
+  onUpdate(){
+    if(this.state.editable){
+      var name = this.state.recipe.name
+      var servings = this.state.recipe.servings
+      var prepTime = this.state.recipe.prep_time
+      var cookTime = this.state.recipe.cook_time
+      var instructions = this.state.recipe.instructions
+      var recipe = {name: name, servings: servings, prep_time: prepTime, cook_time: cookTime, instructions: instructions}
+      this.handleUpdate(recipe)
+    }
+    this.setState({ editable: !this.state.editable})
+  },
+
+  handleUpdate(recipe){
+    $.ajax({
+      url: `/api/v1/recipes/${this.props.id}`,
+      type: 'PUT',
+      data: {recipe: recipe},
+      success: () => {
+        console.log('you did it');
+        this.updateRecipe(recipe)
+      }
+    })
+  },
+
+  updateRecipe(recipe){
+    this.setState({recipe: recipe})
   },
 
   render(){
-    var name = this.state.editable ? <input type="text" defaultValue={this.state.recipe.name}/> : <h4>{this.state.recipe.name}</h4>
-    var servings = this.state.editable ? <input type="text" defaultValue={this.state.recipe.servings}/> : this.state.recipe.servings
-    var prep_time = this.state.editable ? <input type="text" defaultValue={this.state.recipe.prep_time}/> : this.state.recipe.prep_time
-    var cook_time = this.state.editable ? <input type="text" defaultValue={this.state.recipe.cook_time}/> : this.state.recipe.cook_time
-    var instructions = this.state.editable ? <input type="text" defaultValue={this.state.recipe.instructions}/> : this.state.recipe.instructions
+    var name = this.state.editable ? <input type="text"
+                                        onChange={(e) => this.setState({ recipe: {name: e.target.value,
+                                                                                  servings: this.state.recipe.servings,
+                                                                                  prep_time: this.state.recipe.prep_time,
+                                                                                  cook_time: this.state.recipe.cook_time,
+                                                                                  instructions: this.state.recipe.instructions}}) }
+                                        defaultValue={this.state.recipe.name}/> : <h4>{this.state.recipe.name}</h4>
+    var servings = this.state.editable ? <input type="text"
+                                          onChange={(e) => this.setState({ recipe: {servings: e.target.value,
+                                                                                    name: this.state.recipe.name,
+                                                                                    prep_time: this.state.recipe.prep_time,
+                                                                                    cook_time: this.state.recipe.cook_time,
+                                                                                    instructions: this.state.recipe.instructions}}) }
+                                          defaultValue={this.state.recipe.servings}/> : this.state.recipe.servings
+    var prep_time = this.state.editable ? <input type="text"
+                                            onChange={(e) => this.setState({ recipe: {prep_time: e.target.value,
+                                                                                      name: this.state.recipe.name,
+                                                                                      servings: this.state.recipe.servings,
+                                                                                      cook_time: this.state.recipe.cook_time,
+                                                                                      instructions: this.state.recipe.instructions}}) }
+                                            defaultValue={this.state.recipe.prep_time}/> : this.state.recipe.prep_time
+    var cook_time = this.state.editable ? <input type="text"
+                                              onChange={(e) => this.setState({ recipe: {cook_time: e.target.value,
+                                                                                        name: this.state.recipe.name,
+                                                                                        servings: this.state.recipe.servings,
+                                                                                        prep_time: this.state.recipe.prep_time,
+                                                                                        instructions: this.state.recipe.instructions}}) }
+                                              defaultValue={this.state.recipe.cook_time}/> : this.state.recipe.cook_time
+    var instructions = this.state.editable ? <input type="text"
+                                                onChange={(e) => this.setState({ recipe: {instructions: e.target.value,
+                                                                                          name: this.state.recipe.name,
+                                                                                          servings: this.state.recipe.servings,
+                                                                                          prep_time: this.state.recipe.prep_time,
+                                                                                          cook_time: this.state.recipe.cook_time}}) }
+                                                defaultValue={this.state.recipe.instructions}/> : this.state.recipe.instructions
     return (
       <div className="container">
         <div className="col m4 s12">
           <div className="col s9">
             <div className="card">
               <div className="card-content">
-                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.handleEdit}>{this.state.editable ? 'Submit' : 'Edit' }</button></p>
+                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.onUpdate}>{this.state.editable ? 'Submit' : 'Edit' }</button></p>
                 {name}
                 <p>Servings: {servings}</p>
                 <p>Prep Time: {prep_time}</p>
