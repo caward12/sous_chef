@@ -13,7 +13,7 @@ var Recipe = React.createClass({
 
   ingredientsList(){
     var ingredState = this.state.ingredients
-    return this.state.ingredients.map(ingredient => {
+    return this.state.ingredients.map((ingredient, index) => {
       return (
         this.state.editable ? <li key={ingredient.id}>
                               <input className="ingredient-amount" type='text'
@@ -28,12 +28,6 @@ var Recipe = React.createClass({
                                      defaultValue={ingredient.name} />
 
                               </li> : <li key={ingredient.id}> {ingredient.amount} {ingredient.name}</li>
-        // <Ingredient
-        // key={ingredient.id}
-        // name={ingredient.name}
-        // amount={ingredient.amount}
-        // handleEditClick={this.handleEditClick}
-        // id={ingredient.id}/>)
       )
     })
   },

@@ -15,7 +15,7 @@ class Api::V1::IngredientsController < ApplicationController
 
   def update
     ingredient = Ingredient.find(params[:id])
-    if ingredient.update_attributes(params)
+    if ingredient.update_attributes(ingredient_params)
       render json: ingredient
     else
       render json: ingredient.error.full_messages
