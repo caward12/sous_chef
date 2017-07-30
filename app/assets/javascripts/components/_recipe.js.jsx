@@ -30,19 +30,6 @@ var Recipe = React.createClass({
     })
   },
 
-  handleEdit(){
-    if(this.state.editable){
-      var name = this.state.recipe.name
-      var servings = this.state.recipe.servings
-      var prepTime = this.state.recipe.prep_time
-      var cookTime = this.state.recipe.cook_time
-      var ingredients = this.state.recipe.ingredients
-      console.log('in handleEdit', this.state.editable, name, servings);
-      this.onUpdate()
-    }
-    this.setState({editable: !this.state.editable})
-  },
-
   onUpdate(){
     if(this.state.editable){
       var name = this.state.recipe.name
@@ -62,7 +49,6 @@ var Recipe = React.createClass({
       type: 'PUT',
       data: {recipe: recipe},
       success: () => {
-        console.log('you did it');
         this.updateRecipe(recipe)
       }
     })
@@ -114,7 +100,7 @@ var Recipe = React.createClass({
           <div className="col s9">
             <div className="card">
               <div className="card-content">
-                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.onUpdate}>{this.state.editable ? 'Submit' : 'Edit' }</button></p>
+                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.onUpdate}>{this.state.editable ? 'Submit' : 'Edit Recipe' }</button></p>
                 {name}
                 <p>Servings: {servings}</p>
                 <p>Prep Time: {prep_time}</p>
