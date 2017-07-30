@@ -11,12 +11,23 @@ var Recipe = React.createClass({
       this.setState({ recipe: response, ingredients: response.ingredients, categories: response.categories}) })
   },
 
+  handleEditClick() {
+    debugger
+    if (this.state.editable) {
+        var name = this.state.name;
+        var amount = this.state.amount;
+        console.log('in handleEdit', this.state.editable, name, amount);
+    }
+    this.setState({ editable: !this.state.editable })
+  },
+
   ingredientsList(){
     return this.state.ingredients.map(ingredient => {
       return (<Ingredient
         key={ingredient.id}
         name={ingredient.name}
         amount={ingredient.amount}
+        handleEditClick={this.handleEditClick}
         id={ingredient.id}/>)
     })
   },
@@ -100,7 +111,7 @@ var Recipe = React.createClass({
           <div className="col s9">
             <div className="card">
               <div className="card-content">
-                <p><button className="waves-effect waves-light btn red edit-recipe" onClick={this.onUpdate}>{this.state.editable ? 'Submit' : 'Edit Recipe' }</button></p>
+                <p tabIndex="0"><button className="waves-effect waves-light btn red edit-recipe" onClick={this.onUpdate}>{this.state.editable ? 'Submit' : 'Edit Recipe' }</button></p>
                 {name}
                 <p>Servings: {servings}</p>
                 <p>Prep Time: {prep_time}</p>
