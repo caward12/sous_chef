@@ -16,13 +16,13 @@ var Recipe = React.createClass({
     return this.state.ingredients.map((ingredient, index) => {
       return (
         this.state.editable ? <li key={ingredient.id}>
-                              <input name="ingredient-amount" type='text'
+                              <input className="ingredient-amount" name="ingredient-amount" type='text'
                                      onChange={ (e) => this.setState({ingredients: ingredState.slice(0, index).concat(ingredState.slice(index +1, ingredState.length)).concat({amount: e.target.value,
                                                                                       name: ingredient.name,
                                                                                       id: ingredient.id})
                                                                                     }) }
                                      defaultValue={ingredient.amount} />
-                                   <input  name="ingredient-name" type='text'
+                                   <input className="ingredient-name" name="ingredient-name" type='text'
                                      onChange={ (e) => this.setState({ingredients: ingredState.slice(0, index).concat(ingredState.slice(index +1, ingredState.length)).concat({ name: e.target.value,
                                                                                       amount: ingredient.amount,
                                                                                       id: ingredient.id})
