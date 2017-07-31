@@ -1,3 +1,7 @@
 language: ruby
 rvm:
  - 2.3
+services:
+  - postgresql
+before_script:
+- psql -c 'create database sous_chef_test;' -U postgres
