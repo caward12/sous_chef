@@ -128,8 +128,7 @@ var Recipe = React.createClass({
                                                                                           cook_time: this.state.recipe.cook_time}}) }
                                                 defaultValue={this.state.recipe.instructions}/> : this.state.recipe.instructions
     return (
-      <div className="container">
-        <div className="col m4 s12">
+        <div className="col m8 s12">
           <div className="col s9">
             <div className="card">
               <div className="card-content">
@@ -159,7 +158,6 @@ var Recipe = React.createClass({
             </div>
           </div>
         </div>
-      </div>
     )
   }
 })

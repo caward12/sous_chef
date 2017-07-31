@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170722233824) do
+ActiveRecord::Schema.define(version: 20170731203551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20170722233824) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "grocery_list_items", force: :cascade do |t|
+    t.string  "item"
+    t.integer "grocery_list_id"
+    t.index ["grocery_list_id"], name: "index_grocery_list_items_on_grocery_list_id", using: :btree
+  end
+
+  create_table "grocery_lists", force: :cascade do |t|
+    t.string  "name",    default: "July 31 2017"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_grocery_lists_on_user_id", using: :btree
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -60,6 +72,8 @@ ActiveRecord::Schema.define(version: 20170722233824) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "grocery_list_items", "grocery_lists"
+  add_foreign_key "grocery_lists", "users"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "recipe_categories", "categories"
   add_foreign_key "recipe_categories", "recipes"

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :recipes, only: [:new, :index, :show]
+  resources :grocery_lists, only: [:show, :update, :edit]
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
       resources :ingredients, only: [:create, :update]
       resources :categories, only: [:index, :create, :update]
       resources :recipe_categories, only: [:create, :destroy]
+      resources :grocery_lists, only: [:create]
     end
   end
 end
