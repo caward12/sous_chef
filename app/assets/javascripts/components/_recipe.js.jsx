@@ -17,14 +17,16 @@ var Recipe = React.createClass({
       return (
         this.state.editable ? <li key={ingredient.id}>
                               <input className="ingredient-amount" type='text'
-                                     onChange={ (e) => this.setState({ingredients: [{amount: e.target.value,
+                                     onChange={ (e) => this.setState({ingredients: ingredState.slice(0, index).concat(ingredState.slice(index +1, ingredState.length)).concat({amount: e.target.value,
                                                                                       name: ingredient.name,
-                                                                                      id: ingredient.id}]}) }
+                                                                                      id: ingredient.id})
+                                                                                    }) }
                                      defaultValue={ingredient.amount} />
                               <input className="ingredient-name" type='text'
-                                     onChange={ (e) => this.setState({ingredients: [{ name: e.target.value,
+                                     onChange={ (e) => this.setState({ingredients: ingredState.slice(0, index).concat(ingredState.slice(index +1, ingredState.length)).concat({ name: e.target.value,
                                                                                       amount: ingredient.amount,
-                                                                                      id: ingredient.id}]}) }
+                                                                                      id: ingredient.id})
+                                                                                    }) }
                                      defaultValue={ingredient.name} />
 
                               </li> : <li key={ingredient.id}> {ingredient.amount} {ingredient.name}</li>
@@ -63,7 +65,7 @@ var Recipe = React.createClass({
         type: 'PUT',
         data: {ingredient: ingredient},
         success: ()=>{
-          this.updateIngredients(ingredient)
+          this.updateIngredients()
         }
       })
     })
@@ -80,8 +82,9 @@ var Recipe = React.createClass({
     })
   },
 
-  updateIngredients(ingredient){
-    this.setState({ingredients: [ingredient]})
+  updateIngredients(){
+    $.getJSON('/api/v1/recipes/' + this.props.id, (response) => {
+      this.setState({ingredients: response.ingredients}) })
   },
 
   updateRecipe(recipe){
