@@ -27,15 +27,15 @@ describe "categories api" do
 
     params= {
       recipe_id: recipe.id,
-      categories: [{name: "breakfast"}]
+      categories: {
+        "0"=> {name: "breakfast"}}
     }
     post "/api/v1/categories", params
 
     expect(response).to be_success
 
     new_category = JSON.parse(response.body)
-
-    expect(new_category["name"]).to eq("breakfast")
+    expect(new_category.first["name"]).to eq("breakfast")
   end
 
   it "can update a category name" do

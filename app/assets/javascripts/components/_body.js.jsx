@@ -49,8 +49,10 @@ var Body = React.createClass({
     return (
       <div className="row">
         <div className="col s3 recipe-categories">
-          {this.categoriesList()}
-          <h5><a href="/recipes">All Recipes</a></h5>
+            <div className="categories-list">
+              {this.categoriesList()}
+              <a href="/recipes" className="waves-effect waves-teal btn-flat" tabIndex="0">All Recipes</a>
+            </div>
         </div>
         <div className="col s9 all-recipes">
           {this.recipeCards()}

@@ -5,11 +5,11 @@ describe "ingredients api" do
     user = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234", password_confirmation: "1234")
     recipe = user.recipes.create(name: "pancakes", servings: 2, cook_time: "30 min", prep_time: "5 min", instructions: "mix all and pour on hot griddle")
     params = {recipe_id: recipe.id,
-              ingredients: [
-              {"0": {name: "flour", amount:"2 cups"}},
-              {"1":{name: "eggs", amount: "2"}}
-              ]}
-
+              ingredients: {
+               "0" => {name: "flour", amount:"2 cups"},
+              "1" => {name: "eggs", amount: "2"}
+              }}
+# "ingredients"=>{"0"=>{"name"=>"test", "amount"=>"1"}, "1"=>{"name"=>"test", "amount"=>"2"}
     post "/api/v1/ingredients", params
 
     expect(response).to be_success
@@ -29,13 +29,18 @@ describe "ingredients api" do
     ingredient = recipe.ingredients.create(name: "flour", amount: "1 cup")
     recipe.ingredients.create(name: "eggs", amount: "2")
 
-    put "/api/v1/ingredients/#{ingredient.id}?amount=2cups"
+    params= {
+      ingredient: {
+        amount: "2 cups"
+      }
+    }
+    put "/api/v1/ingredients/#{ingredient.id}", params
 
     expect(response).to be_success
 
     updated_ingredient = JSON.parse(response.body)
 
     expect(updated_ingredient["name"]).to eq("flour")
-    expect(updated_ingredient["amount"]).to eq("2cups")
+    expect(updated_ingredient["amount"]).to eq("2 cups")
   end
 end

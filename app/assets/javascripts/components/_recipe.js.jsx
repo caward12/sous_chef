@@ -16,13 +16,13 @@ var Recipe = React.createClass({
     return this.state.ingredients.map((ingredient, index) => {
       return (
         this.state.editable ? <li key={ingredient.id}>
-                              <input className="ingredient-amount" type='text'
+                              <input name="ingredient-amount" type='text'
                                      onChange={ (e) => this.setState({ingredients: ingredState.slice(0, index).concat(ingredState.slice(index +1, ingredState.length)).concat({amount: e.target.value,
                                                                                       name: ingredient.name,
                                                                                       id: ingredient.id})
                                                                                     }) }
                                      defaultValue={ingredient.amount} />
-                              <input className="ingredient-name" type='text'
+                                   <input  name="ingredient-name" type='text'
                                      onChange={ (e) => this.setState({ingredients: ingredState.slice(0, index).concat(ingredState.slice(index +1, ingredState.length)).concat({ name: e.target.value,
                                                                                       amount: ingredient.amount,
                                                                                       id: ingredient.id})
@@ -92,35 +92,35 @@ var Recipe = React.createClass({
   },
 
   render(){
-    var name = this.state.editable ? <input type="text"
+    var name = this.state.editable ? <input type="text" name="recipe-name"
                                         onChange={(e) => this.setState({ recipe: {name: e.target.value,
                                                                                   servings: this.state.recipe.servings,
                                                                                   prep_time: this.state.recipe.prep_time,
                                                                                   cook_time: this.state.recipe.cook_time,
                                                                                   instructions: this.state.recipe.instructions}}) }
                                         defaultValue={this.state.recipe.name}/> : <h4>{this.state.recipe.name}</h4>
-    var servings = this.state.editable ? <input type="text"
+    var servings = this.state.editable ? <input type="text" name="recipe-servings"
                                           onChange={(e) => this.setState({ recipe: {servings: e.target.value,
                                                                                     name: this.state.recipe.name,
                                                                                     prep_time: this.state.recipe.prep_time,
                                                                                     cook_time: this.state.recipe.cook_time,
                                                                                     instructions: this.state.recipe.instructions}}) }
                                           defaultValue={this.state.recipe.servings}/> : this.state.recipe.servings
-    var prep_time = this.state.editable ? <input type="text"
+    var prep_time = this.state.editable ? <input type="text" name="recipe-prep"
                                             onChange={(e) => this.setState({ recipe: {prep_time: e.target.value,
                                                                                       name: this.state.recipe.name,
                                                                                       servings: this.state.recipe.servings,
                                                                                       cook_time: this.state.recipe.cook_time,
                                                                                       instructions: this.state.recipe.instructions}}) }
                                             defaultValue={this.state.recipe.prep_time}/> : this.state.recipe.prep_time
-    var cook_time = this.state.editable ? <input type="text"
+    var cook_time = this.state.editable ? <input type="text" name="recipe-cook"
                                               onChange={(e) => this.setState({ recipe: {cook_time: e.target.value,
                                                                                         name: this.state.recipe.name,
                                                                                         servings: this.state.recipe.servings,
                                                                                         prep_time: this.state.recipe.prep_time,
                                                                                         instructions: this.state.recipe.instructions}}) }
                                               defaultValue={this.state.recipe.cook_time}/> : this.state.recipe.cook_time
-    var instructions = this.state.editable ? <input type="text"
+    var instructions = this.state.editable ? <input type="text" name="recipe-instructions"
                                                 onChange={(e) => this.setState({ recipe: {instructions: e.target.value,
                                                                                           name: this.state.recipe.name,
                                                                                           servings: this.state.recipe.servings,
