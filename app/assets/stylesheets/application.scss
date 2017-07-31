@@ -80,3 +80,22 @@ nav a {
  .edit-recipe {
    float: right;
  }
+
+ input.ingredient-amount{
+   width: 30%;
+   float: left;
+ }
+
+ input.ingredient-name{
+   width: 69%;
+   float: right;
+ }
+
+ .btn-flat{
+  //  background:none;
+  //  border:none;
+   font-size: 23px;
+   color: #c62828;
+   text-transform: lowercase;
+ }
+

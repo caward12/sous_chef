@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "recipe index", :js => :true do
-  it "can sort recipes by categories" do
+  it "can sort recipes by categories"  do
     user = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234", password_confirmation: "1234")
     user.recipes.create(name: "pancakes", servings: 2, cook_time: "30 min", prep_time: "5 min", instructions: "mix all and pour on hot griddle")
     user.recipes.first.categories.create(name: "breakfast")
@@ -14,11 +14,11 @@ describe "recipe index", :js => :true do
 
     visit recipes_path
 
-    within ".recipe-categories" do
+    within ".col.s3.recipe-categories" do
       expect(page).to have_content("breakfast")
       expect(page).to have_content("dinner")
-      click_on "breakfast"
     end
+    click_on "breakfast"
 
 
     within ".all-recipes" do

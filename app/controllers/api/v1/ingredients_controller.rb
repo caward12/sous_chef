@@ -28,7 +28,7 @@ class Api::V1::IngredientsController < ApplicationController
   end
 
   def ingredient_params
-    params.permit(:name, :amount)
+    params.require(:ingredient).permit(:name, :amount, :id)
   end
 
 end
