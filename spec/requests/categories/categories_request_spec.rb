@@ -17,8 +17,8 @@ describe "categories api" do
     categories = JSON.parse(response.body)
 
     expect(categories.count).to eq(2)
-    expect(categories.first["name"]).to eq("breakfast")
     expect(categories.last["name"]).to eq("light")
+    expect(categories.first["name"]).to eq("breakfast")
   end
 
   it "can create a category for given recipe" do
