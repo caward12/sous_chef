@@ -3,7 +3,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def index
     user = User.find(current_user)
-    render json: Category.joins(:recipe_categories, :recipes).where('recipes.user_id = ?', user.id).uniq
+    render json: Category.joins(:recipe_categories, :recipes).where('recipes.user_id = ?', user.id).order(:id).uniq
   end
 
   def create
