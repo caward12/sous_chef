@@ -9,7 +9,6 @@ describe "ingredients api" do
                "0" => {name: "flour", amount:"2 cups"},
               "1" => {name: "eggs", amount: "2"}
               }}
-# "ingredients"=>{"0"=>{"name"=>"test", "amount"=>"1"}, "1"=>{"name"=>"test", "amount"=>"2"}
     post "/api/v1/ingredients", params
 
     expect(response).to be_success

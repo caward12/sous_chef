@@ -1,4 +1,5 @@
 class Api::V1::RecipeCategoriesController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def create
     params["categories"].each do |category|
