@@ -7,7 +7,9 @@ var Categories = React.createClass({
 
   render() {
       return (
-          <button className="waves-effect waves-teal btn-flat" tabIndex="0" onClick={this.handleFilter}>{this.props.name}</button>
+          <div>
+            <button className="waves-effect waves-teal btn-flat" tabIndex="0" onClick={this.handleFilter}>{this.props.name}</button>
+          </div>
       )
   }
 });

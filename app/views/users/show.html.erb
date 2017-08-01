@@ -13,6 +13,14 @@
      <div tabindex="0">
        <%= button_to "Create New Recipe", new_recipe_path, method: :get, class: "waves-effect waves-light btn red" %>
      </div>
+     <br>
+     <div tabindex="0">
+       <%= button_to "New Grocery List", new_grocery_list_path, method: :get, class: "waves-effect waves-light btn red" %>
+     </div>
+     <br>
+     <div tabindex="0">
+       <%= button_to "All Grocery Lists", grocery_lists_path, method: :get, class: "waves-effect waves-light btn red" %>
+     </div>
    </div>
 <br>
   <% @recipes.each do |recipe| %>

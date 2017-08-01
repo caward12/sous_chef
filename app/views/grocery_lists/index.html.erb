@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="new-grocery-button">
+    <%= button_to "Create a New List", new_grocery_list_path, method: :get, class: "waves-effect waves-light btn red" %>
+  </div>
+  <h4>All Grocery Lists</h4>
+  <ol>
+    <% @grocery_lists.each do |list| %>
+    <li> <%= link_to list.name, grocery_list_path(list) %></li>
+    <% end %>
+  </ol>
+</div>
+

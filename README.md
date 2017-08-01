@@ -1,24 +1,43 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Welcome to Sous Chef
+Sous Chef is a recipe manger and grocery building app where you can store all your recipes in one place. From your list of recipes, you can create a grocery list from selected recipes.
 
-Things you may want to cover:
+The app is built with a mainly rails API and then react (using the rails-react gem) and some jQuery on the client side.
 
-* Ruby version
+### Setup
 
-* System dependencies
+ruby `2.3.0`
+rails `5.0.4`
 
-* Configuration
+git clone `git@github.com:caward12/sous_chef.git`
+cd into `sous_chef`
+run  `bundle`
 
-* Database creation
+### Schema
 
-* Database initialization
+![schema pic](app/assets/images/sous_chef_schema.png)
 
-* How to run the test suite
+#### Running Tests
+Parts of the test suit uses selenium and is set up to run on a very specific version of Firefox - version 46, which you can download [here](https://www.softexia.com/windows/web-browsers/firefox-46)
 
-* Services (job queues, cache servers, search engines, etc.)
+run  `rspec` to run entire test suite
 
-* Deployment instructions
+### Api endpoints
+There are several api endpoints in this project:
 
-* ...
+`GET /api/v1/recipes` returns all recipes for current_user
+`POST /api/v1/recipes` creates a new recipe given at least a name param
+`PUT /api/v1/recipes/:id` updates a recipe with name, servings, prep_time, cook_time and/or instruction params
+
+`GET /api/v1/categories` returns all categories created by current_user
+`POST /api/v1/categories` creates a new category for recipe_id param
+`PUT /api/v1/categories/:id` updates a category name
+
+`POST /api/v1/ingredients` creates ingredients for a recipe_id param
+`PUT /api/v1/ingredients/:id` updates an ingredient
+
+`POST /api/v1/recipe_categories` creates a recipe_category record for existing category and new recipe
+`DELETE /api/v1/recipe_categories`deletes a recipe_category record
+
+`POST /api/v1/grocery_lists` creates a grocery list and associated grocery_list_items with recipe id(s) passed in
