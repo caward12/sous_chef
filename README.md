@@ -31,11 +31,14 @@ Parts of the test suit uses selenium and is set up to run on a very specific ver
 
 run  `rspec` to run entire test suite
 
+This repo is integrated with Travis ci and runs the test on push to origin branch_name and on creating a pull request.
+
 #### Accessibility
-This project considered accessibility for users in the following ways:
-- color palette: There is one main accent color which helps those with color blindness still see some contrast.
-- tabIndex: tabIndex was used throughout the project to allow users with mobility issues tab through the pages.
-- font-size: font size was increased to make it easier to read. 
+This project took accessibility of users into account in the following way:
+- color palette: there is only one main accent color so for those with various forms of color blindness, there is still a differentiating color.
+- tabIndex: tabIndex was used to allow those with mobility issues to be able to tab through various pages.
+- font size: font size was increased to make it easier to read.
+
 
 ### Api endpoints
 There are several api endpoints in this project:
