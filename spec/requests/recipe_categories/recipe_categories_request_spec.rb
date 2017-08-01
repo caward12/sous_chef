@@ -1,7 +1,24 @@
 require 'rails_helper'
 
 describe "recipe categories api" do
-  xit "can delete a category from a recipe" do
+  it "can create a recipe_category" do
+    user = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234", password_confirmation: "1234")
+    recipe = user.recipes.create(name: "pancakes", servings: 2, cook_time: "30 min", prep_time: "5 min", instructions: "mix all and pour on hot griddle")
+    recipe.categories.create(name: "breakfast")
+    category = Category.create(name: "lunch")
+
+    params = {
+      recipe_id: recipe.id,
+      categories: [category.id]
+    }
+
+    post "/api/v1/recipe_categories", params
+
+    expect(response).to be_success
+
+  end
+
+  it "can delete a category from a recipe" do
     user = User.create(first_name: "Colleen", last_name: "Smith", email: "smith@aol.com", password: "1234", password_confirmation: "1234")
     recipe = user.recipes.create(name: "pancakes", servings: 2, cook_time: "30 min", prep_time: "5 min", instructions: "mix all and pour on hot griddle")
     recipe.categories.create(name: "breakfast")
