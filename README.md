@@ -5,6 +5,8 @@ Sous Chef is a recipe manger and grocery building app where you can store all yo
 
 The app is built with a mainly rails API and then react (using the rails-react gem) and some jQuery on the client side.
 
+production: https://sous-chef18.herokuapp.com/
+
 ### Setup
 
 ruby `2.3.0`
