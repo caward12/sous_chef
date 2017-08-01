@@ -1,11 +1,16 @@
 <div class="container">
   <h4>grocery list for <%= @grocery_list.name %></h4>
-    <ul>
-      <% @grocery_list.grocery_list_items.each do |item| %>
-        <input id="grocery-item" type="checkbox">
-        <label for="grocery-item"><%= item.item %>
-          <br>
-      <% end %>
-  </ul>
+  <br>
+  <div class="grocery-list-checks">
+    <% @grocery_list.grocery_list_items.each do |item| %>
+    <div tabindex="0">
+      <input type="checkbox" id="item-<%= item.id %>" />
+      <label for="item-<%= item.id %>"><%= item.item %></label>
+    </div>
+    <br><br>
+    <% end %>
+
+  </div>
+
 </div>
 

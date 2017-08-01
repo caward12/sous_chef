@@ -97,7 +97,16 @@ nav a {
    text-transform: lowercase;
  }
 
- .waves-effect.waves-light.btn.red.new-grocery {
+#new-grocery {
    float: left;
  }
+
+.grocery-list-checks label{
+  font-size: 22px;
+  color: black;
+}
+
+.new-grocery-button {
+  float: right;
+}
 

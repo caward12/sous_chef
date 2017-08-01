@@ -1,0 +1,19 @@
+
+<div class="container">
+  <h4>Create New Grocery List</h4>
+  <br>
+  <table class="recipe-table">
+    <% current_user.recipes.each_slice(3) do |three_recipes| %>
+    <tr>
+      <% three_recipes.each do |recipe| %>
+        <td tabindex="0"><input type="checkbox" id="<%= recipe.id %>" />
+          <label for="<%= recipe.id %>"><%= recipe.name %></label>
+        </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+  <br>
+  <button class="waves-effect waves-light btn red" id="new-grocery">Create New Grocery List</button>
+
+</div>
