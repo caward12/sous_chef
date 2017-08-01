@@ -102,7 +102,7 @@ function createInstructions(){
         var tableRow = document.createElement('tr')
         categories.forEach(function(category){
           $(tableRow).append("<td><input type='checkbox' id=" + category.id + " /><label for=" + category.id + ">" + category.name + "</label></td>")
-          if (category.id % 3 === 0){
+          if (category.id % 3 == 0){
             table.append(tableRow)
             tableRow = document.createElement('tr')
           }
