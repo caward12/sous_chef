@@ -9,9 +9,9 @@ production: https://sous-chef18.herokuapp.com/
 
 login to production with existing user:
 
-  email: barb@aol.com
+  - email: barb@aol.com
 
-  password: 1234
+  - password: 1234
 
 ### Setup
 
