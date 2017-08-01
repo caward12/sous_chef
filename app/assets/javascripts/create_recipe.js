@@ -33,7 +33,8 @@ function createCategories(){
     recipe_id: recipe,
     categories: arr
   }
-  if(categoryIds.length > 0 && arr.length > 0){
+
+  if(categoryIds.length > 0 && arr[0].name.length > 0){
     postRecipeCategories(recipe, categoryIds)
     postCategories(recipe, categories)
 
@@ -42,7 +43,7 @@ function createCategories(){
     postRecipeCategories(recipe, categoryIds)
 
   }
-  else if (arr.length > 0){
+  else if (arr[0].name.length > 0){
     postCategories(recipe, categories)
 
   }
@@ -128,20 +129,25 @@ function bindAddAnotherIngredientwithPartial(){
 function bindAddInstructionswithForm(){
   $('.create-ingredients .add-instructions').on("click", function(event){
     event.preventDefault()
+    var arr = []
+    Array.from($('.ingredients .ingredient-fields')).forEach(function(row){
+      var data =  {}
+         data["name"]= $(row).children()[0].children[0].value,
+         data["amount"]= $(row).children()[1].children[0].value
+         arr.push(data)
+    })
 
-    createIngredients()
+    if (arr[0].name.length ==0 || arr[0].amount.length == 0){
+      alert("you must have at least one ingredient with name and amount")
+    } else {
+      createIngredients(arr)
+    }
   })
 }
 
-function createIngredients(){
+function createIngredients(arr){
   var recipe = $('.create-ingredients').attr('id')
-  var arr = []
-  Array.from($('.ingredients .ingredient-fields')).forEach(function(row){
-    var data =  {}
-       data["name"]= $(row).children()[0].children[0].value,
-       data["amount"]= $(row).children()[1].children[0].value
-       arr.push(data)
-  })
+
   var ingredients = {
     recipe_id: recipe,
     ingredients: arr
@@ -161,11 +167,16 @@ function createIngredients(){
 function bindAddIngredientswithForm(){
   $('.create-recipe .add-ingredients').on("click", function(event){
     event.preventDefault()
-    createRecipe()
+    if ($("#recipe_name").val().length ==0){
+      alert("You must have a recipe name")
+    }else {
+      createRecipe()
+    }
   })
 }
 
 function createRecipe(){
+
   var recipeData = {
     recipe: {
       name: $("#recipe_name").val(),

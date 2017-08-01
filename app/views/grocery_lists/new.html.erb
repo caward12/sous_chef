@@ -1,6 +1,7 @@
 
 <div class="container">
   <h4>Create New Grocery List</h4>
+  <p>Select recipes to add ingredients to a new grocery list</p>
   <br>
   <table class="recipe-table">
     <% current_user.recipes.each_slice(3) do |three_recipes| %>
