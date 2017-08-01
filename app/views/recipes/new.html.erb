@@ -2,6 +2,8 @@
   <h4>Create New Recipe</h4>
   <div class="create-recipe">
     <%= render partial: 'recipe' %>
+    <br>
+    <br>
   </div>
 
   <div class="create-ingredients">
@@ -10,6 +12,8 @@
       <%= form_tag('ingredient', remote: true, class: "ingredient-form") do |f| %>
         <div class="ingredients">
           <%= render partial: 'ingredients' %>
+          <br>
+          <br>
         </div>
         <br>
         <a href="javascript:;" id="addNewIngredient">Add Another Ingredient</a><br><br>
@@ -18,6 +22,7 @@
 
       <div style="display: none;" id="new_ingredients_form">
         <%= render partial: "ingredients" %>
+        <br>
       </div>
   </div>
 
@@ -42,6 +47,8 @@
     <%= form_tag('category', remote: true, class: "category-form") do |f| %>
       <div class="categories">
         <%= render partial: 'categories' %>
+        <br>
+        <br>
       </div>
       <br>
       <a href="javascript:;" id="addNewCategory">Add Another Category</a><br><br>
