@@ -16,11 +16,15 @@ login to production with existing user:
 ### Setup
 
 ruby `2.3.0`
+
 rails `5.0.4`
 
 git clone `git@github.com:caward12/sous_chef.git`
+
 cd into `sous_chef`
+
 run  `bundle`
+
 
 ### Schema
 
@@ -44,17 +48,23 @@ This project took accessibility of users into account in the following way:
 There are several api endpoints in this project:
 
 `GET /api/v1/recipes` returns all recipes for current_user
+
 `POST /api/v1/recipes` creates a new recipe given at least a name param
+
 `PUT /api/v1/recipes/:id` updates a recipe with name, servings, prep_time, cook_time and/or instruction params
 
 `GET /api/v1/categories` returns all categories created by current_user
+
 `POST /api/v1/categories` creates a new category for recipe_id param
+
 `PUT /api/v1/categories/:id` updates a category name
 
 `POST /api/v1/ingredients` creates ingredients for a recipe_id param
+
 `PUT /api/v1/ingredients/:id` updates an ingredient
 
 `POST /api/v1/recipe_categories` creates a recipe_category record for existing category and new recipe
+
 `DELETE /api/v1/recipe_categories`deletes a recipe_category record
 
 `POST /api/v1/grocery_lists` creates a grocery list and associated grocery_list_items with recipe id(s) passed in
