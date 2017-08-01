@@ -31,6 +31,12 @@ Parts of the test suit uses selenium and is set up to run on a very specific ver
 
 run  `rspec` to run entire test suite
 
+#### Accessibility
+This project considered accessibility for users in the following ways:
+- color palette: There is one main accent color which helps those with color blindness still see some contrast.
+- tabIndex: tabIndex was used throughout the project to allow users with mobility issues tab through the pages.
+- font-size: font size was increased to make it easier to read. 
+
 ### Api endpoints
 There are several api endpoints in this project:
 
