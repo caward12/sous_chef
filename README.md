@@ -7,6 +7,12 @@ The app is built with a mainly rails API and then react (using the rails-react g
 
 production: https://sous-chef18.herokuapp.com/
 
+login to production with existing user:
+
+  email: barb@aol.com
+
+  password: 1234
+
 ### Setup
 
 ruby `2.3.0`
